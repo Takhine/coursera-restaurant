@@ -18,3 +18,33 @@ $(function () { // Same as document.addEventListener("DOMContentLoaded"...
     $(event.target).focus();
   });
 });
+
+(function (global) {
+	var dc = {};
+
+	var homeHtml = "snippets/home-snippet.html";
+
+	//Fuction for inserting innerHtml for 'select'
+	var insertHtml = function (selector, html) {
+		var targetElem = document.querySelector(selector);
+		targetElem.innerHtml = html;
+	};
+
+	//Show  loading icon inside element identified by 'selector'
+	var showLoading = function (selector) {
+		var html = "<div class='text-center'>";
+		html += "<img src='images/ajax-loader.gif'></div>";
+		insertHtml(selector, html);
+	};
+
+	//On page load (before images or css)
+	document.addEventListener("DOMContentLoaded", function(event){
+
+		//On first load, show home view
+		showLoading("#main-content");
+		$ajaxUtils.sendGetRequest(homeHtml, function (responseText){
+			document.querySelector("#main-content").innerHtml = responseText;
+		}, false);
+	});
+	global.$dc = dc;
+})(window);
