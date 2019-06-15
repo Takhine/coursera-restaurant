@@ -94,7 +94,7 @@ $(function () { // Same as document.addEventListener("DOMContentLoaded"...
 			html = insertProperty(html, "short_name", short_name);
 			finalHtml +=html;
 		}
-		finalHtml+ ="</section>";
+		finalHtml +="</section>";
 		return finalHtml;
 	}
 	global.$dc = dc;
